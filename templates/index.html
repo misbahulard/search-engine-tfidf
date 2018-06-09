@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1 class="display-3 text-center title-index"><strong>Cari</strong> Makanan</h1>
+
+<form action="search" method="get">
+	<div class="form-row justify-content-center ml-5">
+		<div class="col-4 ml-5">
+				{{form.keyword(class_="form-control form-control-lg shadow-sm")}}
+		</div>
+		<div class="col-1">
+			<button type="submit" class="btn btn-primary btn-lg shadow-sm">Cari</button>
+		</div>
+	</div>
+</form>
+
+{% endblock %}
+
+{% block addonscript %}
+
+<script>
+	$("#keyword").focus();
+</script>
+
+{% endblock %}

@@ -1,0 +1,72 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  line-height: 60px; /* Vertically center the text there */
+  background-color: #f5f5f5;
+  border-top: 1px solid #e0e0e0;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+body > .container {
+  padding: 60px 15px 0;
+}
+
+.footer > .container {
+  margin-left: 180px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+
+.background {
+  background-image: url("background.jpg");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+}
+
+.title-index {
+  margin-bottom: 80px; 
+  margin-top: 200px;
+}
+
+.search-item {
+  min-height: 80px;
+  width: 600px;
+  margin: 24px 0 24px 180px;
+}
+
+.si-title {
+  font-size: 20px;
+}
+
+.si-title a {
+  color: rgb(170, 104, 118);
+}
+
+.si-link {
+  color: green;
+}
+
+.search-pagination {
+  margin-left: 180px;
+}
