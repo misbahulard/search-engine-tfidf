@@ -29,3 +29,9 @@ To save the article and store to database, run `add_article.py` in tfidf directo
 To run the search engine, run the flask app (`app.py`) and go ahead to the `localhost:5000`.
 
 ```python3 app.py```
+
+## Galleries
+
+[![se1.png](https://s5.postimg.cc/r7g1ofjzb/se1.png)](https://postimg.cc/image/5l117eler/)
+
+[![se2.png](https://s5.postimg.cc/5l117et4n/se2.png)](https://postimg.cc/image/icf7dx2wj/)
