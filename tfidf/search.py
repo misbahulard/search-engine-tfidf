@@ -1,8 +1,14 @@
-from tfidf import grep_article
+""" 
+search.py is for search from keyword that user pass, and return the result 
+first, keyword is looked up in index file (index.txt) to filter the keyword
+is exist or not. And then if exist use tf.idf to get the relevant document
+
+"""
+
+from tfidf import calculate_tfidf
 import sys
 
 def search_for(query):
-    # query = input("Searching for: ")
     query = query.split(" ")
 
     # read index file
@@ -23,11 +29,6 @@ def search_for(query):
         print("You search: ")
         print(keyword)
 
-        result = grep_article.get_result(keyword)
-        # for res in result:
-        #     print("\n", res)
+        result = calculate_tfidf.get_result(keyword)
 
         return result
-
-# if __name__ == "__main__":
-#     main()

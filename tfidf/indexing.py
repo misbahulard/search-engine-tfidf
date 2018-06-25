@@ -1,10 +1,18 @@
+"""
+indexing.py is for index all document in database
+so it will index all unique keyword and store in one file called index.txt
+run the indexing.py again when you add some stuff in database
+"""
+
 import mysql.connector
 import re
 from operator import itemgetter
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
-# create MySQL connection
+
 def create_connection():
+    """ create MySQL connection """
+
     conn = mysql.connector.connect(user='root', password='',
             host='127.0.0.1',
             database='search_engine')
@@ -12,8 +20,9 @@ def create_connection():
     return conn
 
 
-# get document data from DB
 def get_data_docs(conn):
+    """ get document data from DB """
+
     output = []
 
     cursor = conn.cursor()
@@ -26,25 +35,25 @@ def get_data_docs(conn):
     return output
 
 
-# dapatkan hanya konten dokumen
-# dan format menjadi lower case dan hilangkan karakter spesial
-def get_content_and_stem(docs):
-    # factory = StemmerFactory()
-    # stemmer = factory.create_stemmer()
+def get_content(docs):
+    """ 
+    get only content of document 
+    and format it to lower case and remove all special chars
+    """
     contents = []
 
     for doc in docs:
         text = doc[2]
         text = text.lower()
         text = re.sub('[^A-Za-z]+', ' ', text)
-        # text = stemmer.stem(text)
         contents.append(text)
 
     return contents
 
 
-# method for tokenize string
 def tokenizing(docs):
+    """ function for tokenize the string """
+
     conjunctions = ['dan', 'serta', 'lagipula', 'tetapi', 'sedangkan', 'akan', 
             'tetapi', 'sebaiknya', 'namun', 'maupun', 'baik', 'entah', 'atau', 
             'sebelumnya', 'setelahnya', 'ketika', 'bila', 'sampai', 'demi', 'sementara', 
@@ -64,7 +73,6 @@ def tokenizing(docs):
     for doc in docs:
         token = doc.split(" ")
         token = list(filter(None, token))
-        # FILTERING
         token = [text for text in token if text not in conjunctions]
         tokens.append(token)
 
@@ -72,6 +80,8 @@ def tokenizing(docs):
 
 
 def get_index(tokens):
+    """ function for get all unique keyword in document """
+
     uniq_token = [val for token in tokens for val in token]
     uniques = sorted(list(set(uniq_token)))
     return uniques
@@ -81,7 +91,7 @@ def main():
     docs = get_data_docs(conn)
     conn.close()
 
-    contents = get_content_and_stem(docs)
+    contents = get_content(docs)
     tokens = tokenizing(contents)
     indices = get_index(tokens)
 
@@ -90,10 +100,6 @@ def main():
         filehandle.writelines("%s\n" % keyword for keyword in indices)
 
     print("Indexing success!")
-    
-    # indicies = []
-    # with open('index.txt', 'r') as filehandle:
-    #     indicies = [keyword.rstrip() for keyword in filehandle.readlines()]
 
 
 if __name__ == "__main__":

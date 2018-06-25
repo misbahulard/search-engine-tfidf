@@ -16,11 +16,14 @@ def index():
 def search():
     form = SearchForm()
     query = request.args.get('keyword')
+
+    # for pagination purpose
     if not request.args.get('page'):
         page = 1
     else:
         page = int(request.args.get('page'))
 
+    # use tf.idf to search relevant document in query
     data = Searching.search_for(query)
     data_length = len(data)
 
@@ -32,11 +35,6 @@ def search():
     else:
         end = page * pagination_size
     total = math.ceil(data_length / pagination_size)
-
-    print("length: ", data_length)
-    print("start: ", start)
-    print("end: ", end)
-    print("total: ", total)
 
     return render_template("search.html", form=form, data=data, keyword=query, page=page, start=start, end=end, total=total)
 

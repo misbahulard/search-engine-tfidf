@@ -1,3 +1,8 @@
+"""
+add_article.py is for add an article in the internet 
+and store it to the database, so it will be processed later in tf.idf 
+"""
+
 import mysql.connector
 from bs4 import BeautifulSoup
 import urllib.request
@@ -7,6 +12,12 @@ import math
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 def get_text(url):
+    """ 
+    function for get content text only from url that passed in parameter 
+    so it will return only text, and remove all css style and javascripts code
+    and do stemming process of tf.idf here (for performance purpose)
+    """
+
     factory = StemmerFactory()
     stemmer = factory.create_stemmer()
 
@@ -31,6 +42,7 @@ def get_text(url):
 
 
 def create_connection():
+    """ create MySQL connection """
     conn = mysql.connector.connect(user='root', password='',
             host='127.0.0.1',
             database='search_engine')
@@ -39,6 +51,8 @@ def create_connection():
 
 
 def insert_docs(conn, title, content, url):
+    """ insert the document (title, content, and url) to database """
+
     cursor = conn.cursor()
     add_docs = ("INSERT INTO docs "
             "(title, content, url) "
